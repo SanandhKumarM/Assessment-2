@@ -10,15 +10,17 @@ import org.bson.types.ObjectId;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@JsonIgnoreProperties
+@AllArgsConstructor // Lombok annotations
+@JsonIgnoreProperties  //Jackson annotation
 public class Admin {
-    @JsonSerialize(using = ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class) //Serializing ObjectId using ToStringSerializer
     private ObjectId id;
     private String name;
     private String password;
     private String email;
 
+
+    // To give a custom string representations
     @Override
     public String toString() {
         return "User{" +

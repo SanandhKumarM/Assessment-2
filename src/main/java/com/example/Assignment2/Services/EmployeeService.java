@@ -16,14 +16,14 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    //Get all movies
+    //Get all Employees
     public String getAllEmployees()
     {
         var movieList = employeeRepository.findAll();
         return  String.format("{\n\t\"message\": \"%d movies found\", \n\t \"data\": %s \n}", movieList.size(),movieList.toString());
     }
 
-    //Add movies
+    //Add Employees
     public String addEmployee(Employee employee)
     {
         Employee savedMovie = employeeRepository.save(employee);

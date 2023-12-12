@@ -11,11 +11,11 @@ import org.bson.types.ObjectId;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor // Lombok annotations
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class Employee {
-    @JsonSerialize(using = ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class) //Serializing ObjectId using ToStringSerializer
     private ObjectId id;
     private String name;
     private String email;

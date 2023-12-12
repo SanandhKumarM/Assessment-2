@@ -19,28 +19,30 @@ public class TokenService {
         public String createToken(ObjectId userID){
 
             try{
-                Algorithm algo = Algorithm.HMAC256(token_secret);
+                Algorithm algo = Algorithm.HMAC256(token_secret); //Choosing HMCA Algo for coding
                 String token = JWT.create().withClaim("userID", userID.toString()).
                         withClaim("createAt", new Date()).
-                        sign(algo);
+                        sign(algo);  //JWT with user a specific claim and sign it
                 return token;
             }
             catch(UnsupportedEncodingException | JWTCreationException e){
-                e.printStackTrace();
+                e.printStackTrace(); //Exception handling
             }
 
             return null;
         }
 
-        //Decoding token
+        //Decoding token and gets userID claim
         public String getUserToken(String token)
         {
             try{
                 Algorithm algo = Algorithm.HMAC256(token_secret);
+                //Finger the token
                 JWTVerifier jwtVerifier = JWT.require(algo).build();
 
                 DecodedJWT decodedJWT = jwtVerifier.verify(token);
 
+                //etClaim to get userID
                 return decodedJWT.getClaim("userID").asString();
             }
             catch (JWTCreationException | UnsupportedEncodingException e)
@@ -50,6 +52,8 @@ public class TokenService {
             return null;
         }
 
+
+        //Checks if the token is valid
         public boolean isTokenValid(String token)
         {
             String userID = this.getUserToken(token);

@@ -16,7 +16,7 @@ public class EmployeeController {
         this.employeeService=employeeService;
     }
 
-    //add a movie
+    //add a employee
     @PostMapping("add-employee")
     public String saveEmployee(@RequestBody Employee employee)
     {

@@ -21,22 +21,13 @@ public class AdminService {
         }
 
 
-        public Admin getAdmin(ObjectId id)
-        {
-            Optional<Admin> optionalUser = adminRepository.findById(id);
-            return optionalUser.orElseGet(optionalUser::get);
-        }
-
-        public List<Admin> getAdmin(){
-            return adminRepository.findAll();
-        }
-
+        //Signup Admin function
         public String signUp(Admin admin){
             Admin savedUser = adminRepository.save(admin);
             return String.format( "{\n\t \"Message\": \"Successfully Create the user\",\n\t \"data\": %s \n}", admin.toString());
         }
 
-
+        //Login Admin function
         public String login(String email, String password)
         {
             List<Admin> foundUsers = adminRepository.getAdminByEmail(email);
@@ -55,6 +46,6 @@ public class AdminService {
                             "\"data\":{\"Name\": \"%s\", \n\t\t \"Email\": \"%s\" },\12\t\"token\": \"%s\" \n }", foundUsers.get(0).getName(),
                     foundUsers.get(0).getEmail(),token);
         }
-    }
+}
 
 

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+// JWT Auth
 @Configuration
 public class JwtFilter extends GenericFilterBean {
 
@@ -24,6 +25,7 @@ public class JwtFilter extends GenericFilterBean {
     }
 
 
+    // Function checks auth every incoming request
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
@@ -33,13 +35,16 @@ public class JwtFilter extends GenericFilterBean {
 
 
 
-        String token = httpServletRequest.getHeader("Authorization");
+        String token = httpServletRequest.getHeader("Authorization"); // Gets the auth header
 
+        //Approves requests from the controller
         if ("OPTIONS".equalsIgnoreCase(httpServletRequest.getMethod()))
         {
-            httpServletResponse.sendError(HttpServletResponse.SC_OK, "Success");
+            httpServletResponse.sendError(HttpServletResponse.SC_OK, "Success");  //Response
             return;
         }
+
+        //Check if the request URI contains "admin" to allow it without a JWT token
         if (allowReqWithoutToken(httpServletRequest))
         {
             httpServletResponse.setStatus(HttpServletResponse.SC_OK, "Success");
@@ -53,6 +58,7 @@ public class JwtFilter extends GenericFilterBean {
         }
     }
 
+    //check if the request can be allowed without a token
     public boolean allowReqWithoutToken(HttpServletRequest httpServletRequest){
         if (httpServletRequest.getRequestURI().contains("admin"))
         {

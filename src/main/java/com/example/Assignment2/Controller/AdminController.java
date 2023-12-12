@@ -19,23 +19,18 @@ public class AdminController {
         this.adminService = adminService;
     }
 
+    //Create Admin
     @PostMapping("/add-admin")
     public String signUp(@RequestBody Admin admin)
     {
         return adminService.signUp(admin);
     }
 
+    //Login Admin
     @PostMapping("/login")
     public String login(@RequestBody Map<String,Object> map)
     {
         return adminService.login(map.get("email").toString(), map.get("password").toString());
     }
 
-    @GetMapping("/get-admin")
-    public Admin getAdmin(HttpServletRequest request)
-    {
-        ObjectId userId = (ObjectId) request.getAttribute("userId");
-        return adminService.getAdmin(userId);
-
-    }
 }
