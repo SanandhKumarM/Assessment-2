@@ -24,7 +24,7 @@ public class EmployeeController {
     }
 
     //get an employee
-    @GetMapping("get-employee")
+    @GetMapping("getAll")
     public String getEmployee()
     {
         return employeeService.getAllEmployees();

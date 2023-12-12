@@ -54,7 +54,7 @@ public class JwtFilter extends GenericFilterBean {
     }
 
     public boolean allowReqWithoutToken(HttpServletRequest httpServletRequest){
-        if (httpServletRequest.getRequestURI().contains("user"))
+        if (httpServletRequest.getRequestURI().contains("admin"))
         {
             return  true;
         }
